@@ -17,14 +17,9 @@ def predict():
     '''
     #int_features = np.zeros((1, 10))
     #int_features =[int(x) for x in request.form.values()]
-    if request.values.get("Age") == None:
-        age = 0
-    else:
-        age = request.values.get("Age")
-    if request.values.get("Sms Received") == None:
-        sms = 0
-    else:
-        sms = request.values.get("Sms Received")
+    age = request.values.get("Age")
+
+    sms = request.values.get("Sms Received")
     
     if request.values.get("Appointment Date") == None:
         appdt = datetime.strptime('1900-01-01', '%Y-%m-%d').date()
@@ -41,10 +36,7 @@ def predict():
     inp = np.array([age, 0,0 ,0, 0, sms, 0, deltday,0 ,0 ])
     final_features = np.array(inp).reshape(1, 10)
     
-    if request.values.get("Age") == None:
-        prediction = 0
-    else:
-        prediction = round(model.predict_proba(final_features)[0][0] *100, 2)
+    prediction = round(model.predict_proba(final_features)[0][0] *100, 2)
 
     return render_template('index_f.html', prediction_text = 'Appointment Chance {} %'.format(prediction))
 
