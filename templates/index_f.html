@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+
+<body>
+<div class="login">
+	<h1>Predict Show No Show</h1>
+	
+	<form action="{{ url_for('predict')}}"method="post">
+		<b> Age: </b><input type="number" name="Age" placeholder="Age" required="required" />
+		<b> SMS Received: </b><input type="number" name="Sms Received" placeholder="Sms Received" required="required" />
+		<b> Appointment Date: </b><input type="date" name="Appointment Date" placeholder="Appointment Date" required="required" />
+		<b> Scheduled Date: </b><input type="date" name="Scheduled Date" placeholder="Scheduled Date" required="required" />
+		<button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+	</form>
+
+	<br>
+	<br>
+	{{prediction_text }}
+	
+</div>
+
+</body>
+</html>
