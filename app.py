@@ -33,8 +33,11 @@ def predict():
     
     deltday = abs((appdt - schdt).days)
     inp = np.array([age, 0, 0, 0, 0, sms, 0, deltday, 0, 0]).reshape(1, 10)
-  
-    prediction = round(model.predict_proba(inp)[0][1] *100, 2)
+    
+    if request.values.get("Age") == None:
+        prediction = 0
+    else:
+        prediction = round(model.predict_proba(inp)[0][1] *100, 2)
 
     return render_template('index_f.html', prediction_text = 'Appointment Chance {} %'.format(prediction))
 
