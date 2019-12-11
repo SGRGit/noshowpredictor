@@ -32,11 +32,9 @@ def predict():
         schdt = datetime.strptime(request.values.get("Scheduled Date"), '%Y-%m-%d').date()
     
     deltday = abs((appdt - schdt).days)
-    
-    inp = np.array([age, 0,0 ,0, 0, sms, 0, deltday,0 ,0 ])
-    final_features = np.array(inp).reshape(1, 10)
-    
-    prediction = round(model.predict_proba(final_features)[0][0] *100, 2)
+    inp = np.array([age, 0, 0, 0, 0, sms, 0, deltday, 0, 0]).reshape(1, 10)
+  
+    prediction = round(model.predict_proba(inp)[0][1] *100, 2)
 
     return render_template('index_f.html', prediction_text = 'Appointment Chance {} %'.format(prediction))
 
